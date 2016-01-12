@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DetailViewController.h
 //  ToDo List
 //
 //  Created by Anastasia Shmakova on 11.01.16.
