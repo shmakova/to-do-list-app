@@ -20,9 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.datePicker.minimumDate = [NSDate date];
     [self.datePicker addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
+    
     [self.buttonSave addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    
     self.textField.delegate = self;
     UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEndEditing)];
     [self.view addGestureRecognizer:handleTap];
@@ -43,7 +46,26 @@
 }
 
 - (void)save {
-    NSLog(@"save");
+    NSString *eventInfo = self.textField.text;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm dd.MMMM.yyyy";
+    
+    NSString *eventDate = [formatter stringFromDate:self.eventDate];
+    
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          eventInfo, @"eventInfo",
+                          eventDate, @"eventDate", nil];
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.userInfo = dict;
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.fireDate = self.eventDate;
+    notification.alertBody = eventInfo;
+    notification.applicationIconBadgeNumber = 1;
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    
+    [[UIApplication sharedApplication]scheduleLocalNotification:notification];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
