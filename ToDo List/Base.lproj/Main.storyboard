@@ -32,7 +32,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="sQH-uj-FfZ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="egj-9r-fkP">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="q2a-96-0yE"/>
+                                <segue destination="BYZ-38-t0r" kind="push" id="q2a-96-0yE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -103,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="322"/>
+            <point key="canvasLocation" x="109" y="275"/>
         </scene>
     </scenes>
 </document>

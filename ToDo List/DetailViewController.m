@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.buttonSave addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    self.textField.delegate = self;
     UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEndEditing)];
     [self.view addGestureRecognizer:handleTap];
 }
