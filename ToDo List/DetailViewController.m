@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.buttonSave.userInteractionEnabled = NO;
     self.datePicker.minimumDate = [NSDate date];
     [self.datePicker addTarget:self action:@selector(datePickerValueChanged) forControlEvents:UIControlEventValueChanged];
     
@@ -37,7 +38,12 @@
 }
 
 - (void)handleEndEditing {
-    [self.view endEditing:YES];
+    if ([self.textField.text length] != 0) {
+        [self.view endEditing:YES];
+        self.buttonSave.userInteractionEnabled = YES;
+    } else {
+        [self showAlertWithMessage:@"Для сохранения события введите значение в текстовое поле"];
+    }
 }
 
 - (void) datePickerValueChanged {
@@ -46,6 +52,21 @@
 }
 
 - (void)save {
+    if (self.eventDate) {
+        if ([self.eventDate compare:[NSDate date]] == NSOrderedSame) {
+            [self showAlertWithMessage:@"Для сохранения события измените значение даты на более позднее"];
+        } else if ([self.eventDate compare:[NSDate date]] == NSOrderedAscending) {
+            [self showAlertWithMessage:@"Дата будущего события не может быть ранее текущей даты"];
+        } else {
+            [self setNotification];
+        }
+    } else {
+        [self showAlertWithMessage:@"Для сохранения события измените значение даты на более позднее"];
+    }
+    
+}
+
+- (void) setNotification {
     NSString *eventInfo = self.textField.text;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -70,10 +91,23 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:self.textField]) {
-        [self.textField resignFirstResponder];
+        if ([self.textField.text length] != 0) {
+            [self.textField resignFirstResponder];
+            self.buttonSave.userInteractionEnabled = YES;
+            return YES;
+        } else {
+            [self showAlertWithMessage:@"Для сохранения события введите значение в текстовое поле"];
+        }
     }
     
-    return YES;
+    return NO;
+}
+
+- (void) showAlertWithMessage : (NSString *) message {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Внимание!" message: message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *alertController){}];
+    [alertController addAction:ok];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end
