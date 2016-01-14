@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2E37B41C481857009C9764 /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2E37B31C481857009C9764 /* MainTableViewController.m */; };
 		3BD11B5D1C4304690028B20A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD11B5C1C4304690028B20A /* main.m */; };
 		3BD11B601C4304690028B20A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD11B5F1C4304690028B20A /* AppDelegate.m */; };
 		3BD11B631C4304690028B20A /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD11B621C4304690028B20A /* DetailViewController.m */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2E37B21C481857009C9764 /* MainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewController.h; sourceTree = "<group>"; };
+		3B2E37B31C481857009C9764 /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		3BD11B581C4304690028B20A /* ToDo List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ToDo List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD11B5C1C4304690028B20A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BD11B5E1C4304690028B20A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				3BD11B611C4304690028B20A /* DetailViewController.h */,
 				3BD11B621C4304690028B20A /* DetailViewController.m */,
 				3BD11B641C4304690028B20A /* Main.storyboard */,
+				3B2E37B21C481857009C9764 /* MainTableViewController.h */,
+				3B2E37B31C481857009C9764 /* MainTableViewController.m */,
 				3BD11B671C4304690028B20A /* Assets.xcassets */,
 				3BD11B691C4304690028B20A /* LaunchScreen.storyboard */,
 				3BD11B6C1C4304690028B20A /* Info.plist */,
@@ -150,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B2E37B41C481857009C9764 /* MainTableViewController.m in Sources */,
 				3BD11B631C4304690028B20A /* DetailViewController.m in Sources */,
 				3BD11B601C4304690028B20A /* AppDelegate.m in Sources */,
 				3BD11B5D1C4304690028B20A /* main.m in Sources */,
