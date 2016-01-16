@@ -7,6 +7,7 @@
 //
 
 #import "MainTableViewController.h"
+#import "DetailViewController.h"
 
 @interface MainTableViewController ()
 
@@ -27,7 +28,8 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    self.arrayEvents = [[NSMutableArray alloc] initWithObjects:@"AAA",@"BBB",@"CCC", nil];
+    NSArray *array = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    self.arrayEvents = [[NSMutableArray alloc] initWithArray:array];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,11 +47,23 @@
     NSString *identifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    NSString *string = [self.arrayEvents objectAtIndex:indexPath.row];
-    cell.textLabel.text = string;
-    // Configure the cell...
+    UILocalNotification *notification = [self.arrayEvents objectAtIndex:indexPath.row];
+    NSDictionary *dict = notification.userInfo;
+    cell.textLabel.text = [dict objectForKey:@"eventInfo"];
+    cell.detailTextLabel.text = [dict objectForKey:@"eventDate"];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UILocalNotification *notification = [self.arrayEvents objectAtIndex:indexPath.row];
+    NSDictionary *dict = notification.userInfo;
+    DetailViewController *detailView = [self.storyboard instantiateViewControllerWithIdentifier:@"detailView"];
+    detailView.eventInfo = [dict objectForKey:@"eventInfo"];
+    detailView.eventDate = notification.fireDate;
+    detailView.isDetail = YES;
+    [self.navigationController pushViewController:detailView animated:YES];
 }
 
 /*
