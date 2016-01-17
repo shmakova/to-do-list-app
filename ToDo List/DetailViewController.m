@@ -23,7 +23,10 @@
     
     if (self.isDetail) {
         self.textField.text = self.eventInfo;
-        self.datePicker.date = self.eventDate;
+        self.textField.userInteractionEnabled = NO;
+        self.datePicker.userInteractionEnabled = NO;
+        self.buttonSave.alpha = 0;
+        [self performSelector:@selector(setDatePickerValueWithAnimation) withObject:nil afterDelay:0.5];
     } else {
     
     self.buttonSave.userInteractionEnabled = NO;
@@ -36,6 +39,10 @@
     UITapGestureRecognizer *handleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleEndEditing)];
     [self.view addGestureRecognizer:handleTap];
     }
+}
+
+- (void)setDatePickerValueWithAnimation {
+    [self.datePicker setDate:self.eventDate animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +100,8 @@
     notification.soundName = UILocalNotificationDefaultSoundName;
     
     [[UIApplication sharedApplication]scheduleLocalNotification:notification];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
